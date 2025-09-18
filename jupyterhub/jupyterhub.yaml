@@ -1,0 +1,156 @@
+
+hub:
+  extraConfig:
+#    01-add-message: |
+#      c.JupyterHub.template_vars = {'announcement_login': 'Example: scheduled maintenance window ' +
+#                                                          'on 7th May, 2.30pm - 3.30pm CEST. ' +
+#                                                          'Backup your data!'
+#                                   }
+    pre-spawn-hook: |
+      async def bootstrap_pre_spawn(spawner):
+        spawner.container_security_context = {"capabilities": {"drop": ["ALL"]}}
+
+      c.KubeSpawner.pre_spawn_hook = bootstrap_pre_spawn
+  networkPolicy:
+    interNamespaceAccessLabels: "accept"
+  containerSecurityContext:
+    allowPrivilegeEscalation: false
+    capabilities:
+     drop:
+     - ALL
+  podSecurityContext:
+    fsGroupChangePolicy: OnRootMismatch
+    runAsNonRoot: true
+    seccompProfile:
+      type: RuntimeDefault
+  resources:
+    limits:
+      cpu: "1"
+      memory: "1Gi"
+#    requests:
+#      cpu: "1"
+#      memory: "1Gi"
+
+ingress:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    nginx.ingress.kubernetes.io/proxy-body-size: "1g"
+  enabled: true
+  hosts:
+    - aneris.vm.fedcloud.eu # replace this with your DNS name
+  tls:
+    - hosts:
+      - aneris.vm.fedcloud.eu # replace this with your DNS name
+      secretName: aneris.vm.fedcloud.eu # replace this with your DNS name
+
+proxy:
+  service:
+    type: ClusterIP
+  chp:
+    containerSecurityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+        - ALL
+    extraPodSpec:
+      securityContext:
+        runAsNonRoot: true
+        seccompProfile:
+          type: RuntimeDefault
+    resources:
+      limits:
+        cpu: "1"
+        memory: "1Gi"
+#      requests:
+#        cpu: "1"
+#        memory: "1Gi"
+
+singleuser:
+  extraFiles:
+    jupyter_notebook_config.json:
+      mountPath: /etc/jupyter/jupyter_notebook_config.json
+      data:
+        MappingKernelManager:
+          cull_idle_timeout: 3600
+          cull_interval: 300
+          cull_connected: true
+          cull_busy: false
+  networkPolicy:
+    enabled: false
+  cloudMetadata:
+    blockWithIptables: false
+  profileList:
+    - display_name: Choose your environment 
+      slug: only-choice
+      profile_options:
+        image:
+          display_name: Image
+          # Enables dynamic image building for this profile
+          dynamic_image_building:
+            enabled: True
+          unlisted_choice:
+            enabled: True
+            display_name: "Custom image"
+            validation_regex: "^.+:.+$"
+            validation_message: "Must be a publicly available docker image, of form <image-name>:<tag>"
+            display_name_in_choices: "Specify an existing docker image"
+            description_in_choices: "Use a pre-existing docker image from a public docker registry (dockerhub, quay, etc)"
+            kubespawner_override:
+              image: "{value}"
+          choices:
+             pangeo-latest:
+               display_name: "quay.io/pangeo/pangeo-notebook:latest"
+               kubespawner_override:
+                 image: quay.io/pangeo/pangeo-notebook:latest
+             ml-notebook-latest:
+               display_name: "quay.io/pangeo/ml-notebook:latest"
+               kubespawner_override:
+                 image: quay.io/pangeo/ml-notebook:latest
+                 extra_resource_guarantees:
+                   nvidia.com/gpu: 1
+                 extra_resource_limits:
+                   nvidia.com/gpu: 1
+             pytorch-notebook-latest:
+               display_name: "quay.io/pangeo/pytorch-notebook:latest"
+               kubespawner_override:
+                 image: quay.io/pangeo/pytorch-notebook:latest
+                 extra_resource_guarantees:
+                   nvidia.com/gpu: 1
+                 extra_resource_limits:
+                   nvidia.com/gpu: 1
+             datascience-notebook-latest:
+               display_name: "quay.io/jupyter/datascience-notebook:latest"
+               kubespawner_override:
+                 image: quay.io/jupyter/datascience-notebook:latest
+  defaultUrl: /lab
+  cpu:
+    guarantee: 1
+    limit: 6
+  memory:
+    guarantee: 1G
+    limit: 12G
+  startTimeout: 600
+  storage:
+    capacity: 10Gi
+    dynamic:
+      storageClass: nfs-csi-backup
+  allowPrivilegeEscalation: false
+  extraPodConfig:
+    securityContext:
+      fsGroupChangePolicy: OnRootMismatch
+      runAsNonRoot: true
+      seccompProfile:
+        type: RuntimeDefault
+
+scheduling:
+  userScheduler:
+    enabled: false
+  userPlaceholder:
+    enabled: false
+
+prePuller:
+  hook:
+    enabled: false
+  continuous:
+    enabled: false
