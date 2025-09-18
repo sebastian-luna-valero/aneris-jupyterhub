@@ -19,3 +19,14 @@ to the JupyterHub deployment are listed below:
    [enrolment URL](https://aai-demo.egi.eu/auth/realms/id/account/#/enroll?groupPath=/vo.access.egi.eu).
 
 3. Access JupyterHub in [https://aneris.vm.fedcloud.eu](https://aneris.vm.fedcloud.eu/).
+
+# GPUs
+
+Access to GPUs is granted via these available environments:
+* `quay.io/pangeo/ml-notebook:latest`
+* `quay.io/pangeo/pytorch-notebook:latest`
+
+However, since this is a shared environment, availability of GPUs
+will depend on current allocation. In case of problems accessing GPUs
+please open an
+[issue](https://github.com/sebastian-luna-valero/aneris-jupyterhub/issues).
