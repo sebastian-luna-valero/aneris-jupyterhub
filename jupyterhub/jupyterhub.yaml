@@ -111,6 +111,14 @@ singleuser:
                    nvidia.com/gpu: 1
                  extra_resource_limits:
                    nvidia.com/gpu: 1
+             ml-notebook-20250124:
+               display_name: "quay.io/pangeo/ml-notebook:2025.01.24"
+               kubespawner_override:
+                 image: quay.io/pangeo/ml-notebook:2025.01.24
+                 extra_resource_guarantees:
+                   nvidia.com/gpu: 1
+                 extra_resource_limits:
+                   nvidia.com/gpu: 1
              pytorch-notebook-latest:
                display_name: "quay.io/pangeo/pytorch-notebook:latest"
                kubespawner_override:
