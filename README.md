@@ -16,7 +16,7 @@ to the JupyterHub deployment are listed below:
    by visiting [https://aai-demo.egi.eu/signup](https://aai-demo.egi.eu/signup).
 
 2. Request access using the EGI Check-in account created in step 1) and visiting the
-   [enrolment URL](https://aai-demo.egi.eu/auth/realms/id/account/#/enroll?groupPath=/vo.access.egi.eu).
+   [enrolment URL](https://aai-demo.egi.eu/auth/realms/id/account/#/enroll?groupPath=/vo.aneris.eu).
 
 3. Access JupyterHub in [https://aneris.vm.fedcloud.eu](https://aneris.vm.fedcloud.eu/).
 
