@@ -30,3 +30,8 @@ However, since this is a shared environment, availability of GPUs
 will depend on current allocation. In case of problems accessing GPUs
 please open an
 [issue](https://github.com/sebastian-luna-valero/aneris-jupyterhub/issues).
+
+# AIES-MAC
+
+In order to test the AIES-MAC pipeline, please follow the steps in
+[this discussion](https://github.com/sebastian-luna-valero/aneris-jupyterhub/issues/2#issuecomment-3332920597).
