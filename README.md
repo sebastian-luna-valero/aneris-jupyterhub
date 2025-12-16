@@ -33,5 +33,12 @@ please open an
 
 # AIES-MAC
 
-In order to test the AIES-MAC pipeline, please follow the steps in
-[this discussion](https://github.com/sebastian-luna-valero/aneris-jupyterhub/issues/2#issuecomment-3332920597).
+In order to test the AIES-MAC pipeline, please follow these steps:
+* Log into [https://aneris.vm.fedcloud.eu/](https://aneris.vm.fedcloud.eu/)
+* Use this option from the drop-down menu: `aies-mac:2025-12-15-a`
+* Once the environment is ready, upload the `aneris-aies-mac-perrine.zip` file from [here](https://github.com/sebastian-luna-valero/aneris-jupyterhub/issues/2#issuecomment-3332920597).
+* Extract the `aneris-aies-mac-perrine.zip`.
+* Look for the `SimplifiedTest.ipynb` example notebook.
+* Switch to the conda `env:aneris` kernel.
+* Run the notebook.
+
