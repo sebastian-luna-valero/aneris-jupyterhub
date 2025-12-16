@@ -99,6 +99,7 @@ singleuser:
             kubespawner_override:
               image: "{value}"
           choices:
+
              pangeo-latest:
                display_name: "quay.io/pangeo/pangeo-notebook:latest"
                kubespawner_override:
@@ -123,6 +124,14 @@ singleuser:
                display_name: "quay.io/pangeo/pytorch-notebook:latest"
                kubespawner_override:
                  image: quay.io/pangeo/pytorch-notebook:latest
+                 extra_resource_guarantees:
+                   nvidia.com/gpu: 1
+                 extra_resource_limits:
+                   nvidia.com/gpu: 1
+             aies-mac-20251215a:
+               display_name: "aies-mac:2025-12-15-a"
+               kubespawner_override:
+                 image: registry.egi.eu/vo.aneris.eu/aies-mac:2025-12-15-a
                  extra_resource_guarantees:
                    nvidia.com/gpu: 1
                  extra_resource_limits:
