@@ -99,7 +99,6 @@ singleuser:
             kubespawner_override:
               image: "{value}"
           choices:
-
              pangeo-latest:
                display_name: "quay.io/pangeo/pangeo-notebook:latest"
                kubespawner_override:
