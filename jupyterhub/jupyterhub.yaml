@@ -159,9 +159,17 @@ singleuser:
     capacity: 10Gi
     dynamic:
       storageClass: nfs-csi-backup
+    extraVolumes:
+      - name: amovalih-vol01
+        persistentVolumeClaim:
+          claimName: amovalih-pvc
+    extraVolumeMounts:
+      - name: amovalih-vol01
+        mountPath: /amovalih
   allowPrivilegeEscalation: false
   extraPodConfig:
     securityContext:
+      fsGroup: 1000
       fsGroupChangePolicy: OnRootMismatch
       runAsNonRoot: true
       seccompProfile:
