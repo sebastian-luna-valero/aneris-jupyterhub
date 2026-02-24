@@ -6,11 +6,27 @@ hub:
 #                                                          'on 7th May, 2.30pm - 3.30pm CEST. ' +
 #                                                          'Backup your data!'
 #                                   }
-    pre-spawn-hook: |
+    pre-spawn-hooks: |
       async def bootstrap_pre_spawn(spawner):
         spawner.container_security_context = {"capabilities": {"drop": ["ALL"]}}
 
-      c.KubeSpawner.pre_spawn_hook = bootstrap_pre_spawn
+      def mount_shm(spawner):
+          volume = {"name": "dshm",
+                    "emptyDir": {"medium": "Memory", "sizeLimit": spawner.user_options.get('shmsize', '20') + 'G'}}
+          volume_mount = {"mountPath": "/dev/shm", "name": "dshm"}
+          volume_exists = False
+          for vol in spawner.volumes:
+              if "name" in vol and vol["name"] == "dshm":
+                  volume_exists = True
+          if not volume_exists:
+              spawner.volumes.append(volume)
+              spawner.volume_mounts.append(volume_mount)
+
+      async def combined_pre_spawn_hook(spawner):
+        await bootstrap_pre_spawn(spawner)
+        mount_shm(spawner)
+
+      c.KubeSpawner.pre_spawn_hook = combined_pre_spawn_hook
   networkPolicy:
     interNamespaceAccessLabels: "accept"
   containerSecurityContext:
@@ -162,6 +178,7 @@ singleuser:
   allowPrivilegeEscalation: false
   extraPodConfig:
     securityContext:
+      fsGroup: 1000
       fsGroupChangePolicy: OnRootMismatch
       runAsNonRoot: true
       seccompProfile:
