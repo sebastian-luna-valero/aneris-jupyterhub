@@ -33,12 +33,18 @@ please open an
 
 # AIES-MAC
 
-In order to test the AIES-MAC pipeline, please follow these steps:
+## Initial configuration of AIES-MAC
+
 * Log into [https://aneris.vm.fedcloud.eu/](https://aneris.vm.fedcloud.eu/)
 * Use this option from the drop-down menu: `aies-mac:2025-12-15-a`
-* Once the environment is ready, upload the `aneris-aies-mac-perrine.zip` file from [here](https://github.com/sebastian-luna-valero/aneris-jupyterhub/issues/2#issuecomment-3332920597).
-* Extract the `aneris-aies-mac-perrine.zip`.
-* Look for the `SimplifiedTest.ipynb` example notebook.
-* Switch to the conda `env:aneris` kernel.
-* Run the notebook.
+* Once the environment is ready, use the `Git` menu at the top,
+  select `Clone a Repository`,
+  and enter `https://gitlab.univ-nantes.fr/paul-gilloteaux-p/aneris_aies-mac.git`
+* Go to the folder where you cloned the repo and open
+  the notebook of interest; e.g. `aneris_aies-mac/CS1/AIES_MAC_forCS1.ipynb`
+* Switch to the conda `env:aneris` kernel
 
+## Update AIES-MAC
+
+* Go to the folder where you cloned the repo; e.g. `aneris_aies-mac/`
+* Use the `Git` menu at the top, select `Pull from Remote`
