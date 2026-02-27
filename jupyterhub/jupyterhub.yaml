@@ -85,15 +85,6 @@ proxy:
 #        memory: "1Gi"
 
 singleuser:
-  extraFiles:
-    jupyter_notebook_config.json:
-      mountPath: /etc/jupyter/jupyter_notebook_config.json
-      data:
-        MappingKernelManager:
-          cull_idle_timeout: 3600
-          cull_interval: 300
-          cull_connected: true
-          cull_busy: false
   networkPolicy:
     enabled: false
   cloudMetadata:
@@ -197,3 +188,6 @@ prePuller:
     enabled: false
   continuous:
     enabled: false
+
+cull:
+  enabled: false
