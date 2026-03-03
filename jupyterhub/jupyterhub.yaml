@@ -120,6 +120,18 @@ singleuser:
                    nvidia.com/gpu: 1
                  extra_resource_limits:
                    nvidia.com/gpu: 1
+                 node_affinity_required:
+                   - matchExpressions:
+                       - key: "nvidia.com/gpu.product"
+                         operator: In
+                         values: ["true"]
+                 node_affinity_preferred:
+                   - weight: 100  # Max weight to prioritize the A100
+                     preference:
+                       matchExpressions:
+                         - key: "nvidia.com/gpu.product"
+                           operator: In
+                           values: ["NVIDIA-A100-80GB-PCIE"]
              ml-notebook-20250124:
                display_name: "quay.io/pangeo/ml-notebook:2025.01.24"
                kubespawner_override:
