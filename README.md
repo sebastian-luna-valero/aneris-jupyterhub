@@ -48,3 +48,22 @@ please open an
 
 * Go to the folder where you cloned the repo; e.g. `aneris_aies-mac/`
 * Use the `Git` menu at the top, select `Pull from Remote`
+
+# Known problems
+
+## Error: pod is forbidden: exceeded quota
+
+If you get an error similar to this one:
+
+```bash
+Spawn failed: (403) Reason: error HTTP response headers: [...]
+"status":"Failure","message":"pods \"jupyter-slunavalero3\" is forbidden: exceeded quota [..]
+```
+
+<img width="1206" height="430" alt="aneris-quota-limit" src="https://github.com/user-attachments/assets/fd17d6b9-d9a5-4e3d-8431-85a303cd4c04" />
+
+The issue is that you have hit the quota limit either in CPU or GPU resources.
+
+See this [grafana dashboard](https://kuba-mon-int.cloud.e-infra.cz/d/vd9rFCL4zaneris/aneris).
+The cause might be that all GPUs are being used at the moment. Either coordinate among
+the users of GPUs or open an issue to discuss the best way forward.
