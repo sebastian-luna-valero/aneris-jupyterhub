@@ -1,7 +1,7 @@
 
 hub:
   allowNamedServers: true
-  namedServerLimitPerUser: 3
+  namedServerLimitPerUser: 4
   extraConfig:
 #    01-add-message: |
 #      c.JupyterHub.template_vars = {'announcement_login': 'Example: scheduled maintenance window ' +
