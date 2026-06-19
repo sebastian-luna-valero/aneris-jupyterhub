@@ -14,7 +14,7 @@ hub:
 
       def mount_shm(spawner):
           volume = {"name": "dshm",
-                    "emptyDir": {"medium": "Memory", "sizeLimit": spawner.user_options.get('shmsize', '20') + 'G'}}
+                    "emptyDir": {"medium": "Memory", "sizeLimit": spawner.user_options.get('shmsize', '31') + 'G'}}
           volume_mount = {"mountPath": "/dev/shm", "name": "dshm"}
           volume_exists = False
           for vol in spawner.volumes:
@@ -209,10 +209,10 @@ singleuser:
   defaultUrl: /lab
   cpu:
     guarantee: 1
-    limit: 6
+    limit: 10
   memory:
     guarantee: 1G
-    limit: 12G
+    limit: 31G
   startTimeout: 600
   storage:
     capacity: 10Gi
