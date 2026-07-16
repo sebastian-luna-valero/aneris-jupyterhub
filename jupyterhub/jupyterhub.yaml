@@ -117,9 +117,9 @@ singleuser:
                kubespawner_override:
                  image: quay.io/pangeo/ml-notebook:latest
                  extra_resource_guarantees:
-                   nvidia.com/gpu: 1
+                   nvidia.com/gpu-mem: 60
                  extra_resource_limits:
-                   nvidia.com/gpu: 1
+                   nvidia.com/gpu-mem: 60
                  extra_pod_config:
                    affinity:
                      nodeAffinity:
@@ -135,9 +135,9 @@ singleuser:
                kubespawner_override:
                  image: quay.io/pangeo/ml-notebook:2025.01.24
                  extra_resource_guarantees:
-                   nvidia.com/gpu: 1
+                   nvidia.com/gpu-mem: 60
                  extra_resource_limits:
-                   nvidia.com/gpu: 1
+                   nvidia.com/gpu-mem: 60
                  extra_pod_config:
                    affinity:
                      nodeAffinity:
@@ -153,9 +153,9 @@ singleuser:
                kubespawner_override:
                  image: quay.io/pangeo/pytorch-notebook:latest
                  extra_resource_guarantees:
-                   nvidia.com/gpu: 1
+                   nvidia.com/gpu-mem: 60
                  extra_resource_limits:
-                   nvidia.com/gpu: 1
+                   nvidia.com/gpu-mem: 60
                  extra_pod_config:
                    affinity:
                      nodeAffinity:
@@ -171,9 +171,9 @@ singleuser:
                kubespawner_override:
                  image: registry.egi.eu/vo.aneris.eu/aies-mac:2025-12-15-a
                  extra_resource_guarantees:
-                   nvidia.com/gpu: 1
+                   nvidia.com/gpu-mem: 60
                  extra_resource_limits:
-                   nvidia.com/gpu: 1
+                   nvidia.com/gpu-mem: 60
                  extra_pod_config:
                    affinity:
                      nodeAffinity:
@@ -189,9 +189,9 @@ singleuser:
                kubespawner_override:
                  image: viseaon/atires-gpu:v1
                  extra_resource_guarantees:
-                   nvidia.com/gpu: 1
+                   nvidia.com/gpu-mem: 60
                  extra_resource_limits:
-                   nvidia.com/gpu: 1
+                   nvidia.com/gpu-mem: 60
                  extra_pod_config:
                    affinity:
                      nodeAffinity:
